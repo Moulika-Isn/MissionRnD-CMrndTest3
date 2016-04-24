@@ -146,7 +146,7 @@ int postorder(struct node*root, struct node_dll *head)
 		return 1;
 }*/
 int bst(struct node *root, int *prod)
-{
+{ // finding product of the elements of bst and its length
 	int len = 0;
 	if (root != NULL)
 	{
@@ -158,7 +158,7 @@ int bst(struct node *root, int *prod)
 	return len;
 }
 int dll(struct node_dll *head, int *prod)
-{
+{  // finding product of elements of dll and its length
 	int len = 0;
 	while (head != NULL)
 	{
@@ -185,8 +185,8 @@ int is_identical(struct node_dll *head, struct node *root){
 	len_bst = bst(root, &prod_bst);
 	len_dll = dll(head, &prod_dll);
 	if (len_dll == len_bst)
-	{
-		if (prod_bst == prod_dll)
+	{  //if their lengths are equal
+		if (prod_bst == prod_dll)  // if their products are equal
 			return 1;
 	}
 	else
