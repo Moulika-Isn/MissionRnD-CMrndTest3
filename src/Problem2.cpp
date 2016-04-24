@@ -116,6 +116,35 @@ int inorder(struct node *root,struct node_dll *head)
 	if (root == NULL && head == NULL)
 		return 1;
 }
+int preorder(struct node*root, struct node_dll *head)
+{
+	if (root != NULL && head != NULL)
+	{
+		if (head->data == root->data)
+		{
+			preorder(root->left, head->next);
+			preorder(root->right, head->next);
+		}
+		else
+			return 0;
+	}
+	if (root == NULL && head == NULL)
+		return 1;
+}
+int postorder(struct node*root, struct node_dll *head)
+{
+	if (root != NULL && head != NULL)
+	{
+		postorder(root->left, head);
+		postorder(root->right, head);
+		if (head->data == root->data)
+			head = head->next;
+		else
+			return 0;
+	}
+	if (root == NULL && head == NULL)
+		return 1;
+}
 int is_identical(struct node_dll *head, struct node *root){
 	if(head==NULL || root==NULL)
 		return -1;
@@ -127,5 +156,5 @@ int is_identical(struct node_dll *head, struct node *root){
 	else
 		return 0;
 		*/
-	return inorder(root, head);
+	return (inorder(root, head)|| preorder(root,head)||postorder(root,head));
 }
