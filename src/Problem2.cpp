@@ -71,6 +71,61 @@ struct node{
 	struct node *right;
 };
 
+/*void bst_to_dll(struct node* bst, struct node **last, struct node **dll)
+{ // CONVERTING BINARY SEARCH TREE TO DOUBLE LINKED LIST
+	if (!bst)
+		return;
+	bst_to_dll(bst->left, last, dll);
+	if (*last)
+		(*last)->right = bst;
+	else
+		*dll = bst;
+	bst->left = *last;
+	*last = bst;
+	if (bst->right)
+		bst_to_dll(bst->right, last, dll);
+	return;
+}
+int areEqual(struct node_dll *head, struct node *dll)
+{ // CHECKING IF BOTH THE LINKED LISTS ARE SAME
+	while (!head && !dll)
+	{
+		if (head->data == dll->data)
+		{
+			head = head->next;
+			dll = dll->right;
+		}
+		else
+			return 0;
+	}
+	return 1;
+}*/
+
+int inorder(struct node *root,struct node_dll *head)
+{
+	if (root != NULL && head!=NULL)
+	{
+		inorder(root->left,head);
+		if (head->data == root->data)
+		{
+			inorder(root->right, head->next);
+		}
+		else
+			return 0;
+	}
+	if (root == NULL && head == NULL)
+		return 1;
+}
 int is_identical(struct node_dll *head, struct node *root){
-	return -1;
+	if(head==NULL || root==NULL)
+		return -1;
+	/*struct node *dll, *last;
+	dll = last = NULL;
+	bst_to_dll(root, &last, &dll);
+	if (areEqual(head, dll))
+		return 1;
+	else
+		return 0;
+		*/
+	return inorder(root, head);
 }
