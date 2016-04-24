@@ -100,7 +100,7 @@ int areEqual(struct node_dll *head, struct node *dll)
 	}
 	return 1;
 }*/
-
+/*
 int inorder(struct node *root,struct node_dll *head)
 {
 	if (root != NULL && head!=NULL)
@@ -144,6 +144,29 @@ int postorder(struct node*root, struct node_dll *head)
 	}
 	if (root == NULL && head == NULL)
 		return 1;
+}*/
+int bst(struct node *root, int *prod)
+{
+	int len = 0;
+	if (root != NULL)
+	{
+		bst(root->left, prod);
+		*prod = *prod * root->data;
+		len++;
+		bst(root->right, prod);
+	}
+	return len;
+}
+int dll(struct node_dll *head, int *prod)
+{
+	int len = 0;
+	while (head != NULL)
+	{
+		*prod = *prod * head->data;
+		head = head->next;
+		len++;
+	}
+	return len;
 }
 int is_identical(struct node_dll *head, struct node *root){
 	if(head==NULL || root==NULL)
@@ -156,5 +179,16 @@ int is_identical(struct node_dll *head, struct node *root){
 	else
 		return 0;
 		*/
-	return (inorder(root, head)|| preorder(root,head)||postorder(root,head));
+	//return (inorder(root, head)|| preorder(root,head)||postorder(root,head));
+	int len_bst = 0, len_dll = 0;
+	int prod_bst = 1, prod_dll = 1;
+	len_bst = bst(root, &prod_bst);
+	len_dll = dll(head, &prod_dll);
+	if (len_dll == len_bst)
+	{
+		if (prod_bst == prod_dll)
+			return 1;
+	}
+	else
+		return 0;
 }
